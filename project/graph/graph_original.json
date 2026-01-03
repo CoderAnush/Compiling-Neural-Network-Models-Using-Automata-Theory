@@ -1,0 +1,39 @@
+{
+  "Input": [
+    "Conv_features_0"
+  ],
+  "Conv_features_0": [
+    "ReLU_features_1"
+  ],
+  "ReLU_features_1": [
+    "MaxPool_features_2"
+  ],
+  "MaxPool_features_2": [
+    "Conv_features_3"
+  ],
+  "Conv_features_3": [
+    "ReLU_features_4"
+  ],
+  "ReLU_features_4": [
+    "MaxPool_features_5"
+  ],
+  "MaxPool_features_5": [
+    "Flatten_features_6"
+  ],
+  "Flatten_features_6": [
+    "Dense_classifier_0"
+  ],
+  "Dense_classifier_0": [
+    "ReLU_classifier_1"
+  ],
+  "ReLU_classifier_1": [
+    "Dense_classifier_2"
+  ],
+  "Dense_classifier_2": [
+    "Softmax_classifier_3"
+  ],
+  "Softmax_classifier_3": [
+    "Output"
+  ],
+  "Output": []
+}

@@ -1,0 +1,27 @@
+{
+  "Input": [
+    "Conv"
+  ],
+  "Conv": [
+    "ReLU"
+  ],
+  "ReLU": [
+    "MaxPool",
+    "Dense"
+  ],
+  "MaxPool": [
+    "Conv",
+    "Flatten"
+  ],
+  "Flatten": [
+    "Dense"
+  ],
+  "Dense": [
+    "ReLU",
+    "Softmax"
+  ],
+  "Softmax": [
+    "Output"
+  ],
+  "Output": []
+}

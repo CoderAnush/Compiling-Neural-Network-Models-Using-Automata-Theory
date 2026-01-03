@@ -1,0 +1,32 @@
+# Virtual environment
+.venv/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.dylib
+*.dll
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Model artifacts
+model/mnist_cnn.pth
+
+# Visualizations and reports (optional: you can keep them locally, but they are generated)
+visualizations/
+report.md
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

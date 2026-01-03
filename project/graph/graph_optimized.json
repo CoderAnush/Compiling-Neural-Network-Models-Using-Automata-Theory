@@ -1,0 +1,30 @@
+{
+  "Input": [
+    "FusedConvReLU_features_0"
+  ],
+  "MaxPool_features_2": [
+    "FusedConvReLU_features_3"
+  ],
+  "MaxPool_features_5": [
+    "ReshapeDense_classifier_0"
+  ],
+  "ReLU_classifier_1": [
+    "Dense_classifier_2"
+  ],
+  "Dense_classifier_2": [
+    "Softmax_classifier_3"
+  ],
+  "Softmax_classifier_3": [
+    "Output"
+  ],
+  "Output": [],
+  "FusedConvReLU_features_0": [
+    "MaxPool_features_2"
+  ],
+  "FusedConvReLU_features_3": [
+    "MaxPool_features_5"
+  ],
+  "ReshapeDense_classifier_0": [
+    "ReLU_classifier_1"
+  ]
+}
