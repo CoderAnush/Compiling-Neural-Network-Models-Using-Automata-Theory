@@ -1,26 +1,38 @@
 {
   "Input": [
-    "Conv"
+    "Conv_features_0"
   ],
-  "Conv": [
-    "ReLU"
+  "Conv_features_0": [
+    "ReLU_features_1"
   ],
-  "ReLU": [
-    "MaxPool",
-    "Dense"
+  "ReLU_features_1": [
+    "MaxPool_features_2"
   ],
-  "MaxPool": [
-    "Conv",
-    "Flatten"
+  "MaxPool_features_2": [
+    "Conv_features_3"
   ],
-  "Flatten": [
-    "Dense"
+  "Conv_features_3": [
+    "ReLU_features_4"
   ],
-  "Dense": [
-    "ReLU",
-    "Softmax"
+  "ReLU_features_4": [
+    "MaxPool_features_5"
   ],
-  "Softmax": [
+  "MaxPool_features_5": [
+    "Flatten_features_6"
+  ],
+  "Flatten_features_6": [
+    "Dense_classifier_0"
+  ],
+  "Dense_classifier_0": [
+    "ReLU_classifier_1"
+  ],
+  "ReLU_classifier_1": [
+    "Dense_classifier_2"
+  ],
+  "Dense_classifier_2": [
+    "Softmax_classifier_3"
+  ],
+  "Softmax_classifier_3": [
     "Output"
   ],
   "Output": []
