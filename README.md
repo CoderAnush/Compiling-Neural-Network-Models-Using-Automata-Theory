@@ -245,15 +245,3 @@ python scripts/run_demo.py
 - In this example, `boost` is negative (optimized slower). This can happen in small demos and when weights are not preserved.
 
 ---
-
-## Clean-up and housekeeping
-
-I can remove compiled artifacts (`__pycache__`, `*.pyc`) and add a `.gitignore` so the repository stays clean. After cleanup I'll re-run tests and linters to ensure everything still passes.
-
----
-
-If you'd like, I can now:
-1. Remove compiled files and unnecessary artifacts and re-run tests/linter, then
-2. Prepare a tidy commit or a PR containing all the cleanup and the improved README.
-
-Which should I do next? (I can start the cleanup now.)
