@@ -1,24 +1,59 @@
 # Neural Network Compiler — Complete Guide (Beginner to Advanced)
 
-:wave: Welcome! This repository is an educational demo that shows how a tiny neural network (a simple MNIST CNN) can be represented as a graph, transformed using basic compiler-style optimizations, and executed again to compare performance and structure.
-
-This guide is written for *everyone* — if you're new to neural networks or compilers, read the "For beginners" sections first; if you're a developer, skip to the "For maintainers and contributors" section.
-
-This README explains the project in plain language and gives step‑by‑step instructions to reproduce results.
+:wave: **Welcome!** This project is an educational demo that bridges the gap between **Deep Learning** (AI) and **Computer Science Theory**.
+It shows how we can treat a Neural Network not as a "black box" of math, but as a **program** that can be analyzed, debugged, and optimized using standard compiler rules.
 
 ---
 
-## What this project does (high level)
+## What is this project? (The Simple Explanation)
 
-- Trains or loads a small convolutional neural network (CNN) that can classify MNIST digits (0–9).
-- Converts the trained model into a node graph (each layer becomes a node).
-- Builds an automaton (a DFA) from the graph and analyzes which parts are reachable.
-- Generates a simple intermediate representation (IR) from the graph (like a program listing of operations).
-- Applies a few demonstration optimizations (e.g., fuse a Conv+ReLU into a single fused node, remove dead nodes).
-- Maps the optimized graph back to a runnable PyTorch model (best-effort mapping; weights are not preserved by the optimizer in this demo).
-- Runs both the original and optimized models, benchmarks them, generates visualizations, and saves a human-readable `report.md`.
+Imagine you have a factory assembly line (the Neural Network). Raw materials (Data) go in, travel through various machines (Layers), and a finished product (Prediction) comes out.
 
-Why this is useful: it shows how compiler ideas (graph transforms, IR, optimization passes) can apply to neural networks in a small, easy-to-follow example.
+Sometimes, this assembly line is inefficient:
+1.  **Dead Ends:** There might be conveyor belts that lead nowhere. Materials sent there are wasted.
+2.  **Redundant Steps:** You might have a machine that paints the product red, followed immediately by a machine that dries the paint. It would be faster to have one machine do both at once.
+
+This project builds a **Compiler** for that factory. It looks at the blueprints, finds these inefficiencies using strict mathematical rules (Automata Theory), and rebuilds a newer, faster factory.
+
+### The 6-Step "Compiler Pipeline" (Detailed Execution)
+
+This project strictly follows the lifecycle of a real compiler. Here is exactly what happens when you run the demo:
+
+#### 1. The Input (The Model)
+*   **Execution:** The system first runs `project/model/train_mnist.py`.
+*   **What happens:** It creates a standard Convolutional Neural Network (CNN). Think of this as a chain of 7 specialized workers (Layers), such as `Conv` (detects patterns) and `ReLU` (filters negative values).
+*   **State:** At this point, the model is just a Python object. The computer treats it as generic code.
+
+#### 2. Graph Extraction (The "Parsing")
+*   **Execution:** The script `project/graph/extract_graph.py` inspects the trained model.
+*   **What happens:** It "reads" the Python code and converts it into a **Computational Graph** (Node-Edge structure). It produces a JSON file (`graph_original.json`) representing the raw blueprint of the network.
+*   **Why:** We cannot optimize Python code easily, but we can easily optimize a graph data structure.
+
+#### 3. Automata Analysis (The "Theory")
+*   **Execution:** `project/automata/dfa_builder.py` converts the graph into a **DFA (Deterministic Finite Automaton)**.
+*   **The Math:** It defines the network as a machine where:
+    *   **States ($Q$):** Each layer of the neural network.
+    *   **Transitions ($\delta$):** The data flow between layers.
+*   **The Algorithm:** It runs a **Reachability Analysis** (using Depth-First Search). It starts at the `Input` and traces every valid path. Any state that is not visited is mathematically proven to be **Unreachable** (Dead Code).
+
+#### 4. Intermediate Representation (IR)
+*   **Execution:** `project/ir/generate_ir.py` converts the graph into text.
+*   **What happens:** Compilers work best with linear instructions, not graphs. The system generates a "recipe" that looks like Assembly Language:
+    ```text
+    %1 = Conv(%0)
+    %2 = ReLU(%1)
+    ```
+*   **Why:** This linear format makes it easier to spot patterns (like two instructions that can be merged).
+
+#### 5. Optimization (The "Cleanup")
+*   **Execution:** `project/optimizer/optimize_all.py` runs two major "passes" over the IR:
+    1.  **Dead Node Elimination:** It physically identifies and deletes the nodes that Step 3 proved were unreachable.
+    2.  **Operator Fusion:** It searches for inefficient patterns. For example, a `Convolution` followed immediately by a `ReLU` is merged into a single `FusedConvReLU` node.
+*   **Result:** A new, streamlined graph (`graph_optimized.json`) with fewer nodes and faster operations.
+
+#### 6. Code Generation & Benchmark
+*   **Execution:** `project/demo_output.py` takes the new graph and "compiles" it back into runnable code (`run_optimized.py`).
+*   **Verification:** It runs a race (Benchmark) between the Original Model and the Optimized Model on the MNIST test data. It generates a report comparing their speed and structure.
 
 ---
 
